@@ -1,19 +1,81 @@
-import 'package:code_with_patel/ui/home_page.dart';
+
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'CardScreen.dart';
+import 'Dbhelper/mongodb.dart';
+import 'HomeScreen.dart';
+import 'ui/home_page.dart';
+
+
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await MongoDatabase.connect();
+  runApp(MyApp());
 }
 
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home:  WalletApp(),
+
     );
   }
 }
+
+
+class WalletApp extends StatefulWidget {
+  @override
+  _WalletAppState createState() => _WalletAppState();
+}
+
+class _WalletAppState extends State<WalletApp> {
+  var screens = [
+    HomeScreen(),
+    CardScreen(),
+  ]; //screens for each tab
+
+  int selectedTab = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color.fromRGBO(38, 81, 158, 1),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text("Home")
+          ),
+
+          BottomNavigationBarItem(
+              icon: Icon(Icons.credit_card),
+              title: Text("Card")
+          ),
+        ],
+        onTap: (index){
+          setState(() {
+            selectedTab = index;
+          });
+        },
+        showUnselectedLabels: true,
+        iconSize: 30,
+      ),
+      /*floatingActionButton: FloatingActionButton(
+        onPressed: (){},
+        elevation: 0,
+        child: Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,*/
+      body: screens[selectedTab],
+    );
+  }
+}
+
+
+
