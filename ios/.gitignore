@@ -3,7 +3,7 @@
 *.mode2v3
 *.moved-aside
 *.pbxuser
-*.perspectivev3
+*.perspectivev3 
 **/*sync/
 .sconsign.dblite
 .tags*
