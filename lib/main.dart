@@ -1,20 +1,13 @@
-
 import 'package:flutter/material.dart';
-
 import 'CardScreen.dart';
 import 'Dbhelper/mongodb.dart';
 import 'HomeScreen.dart';
 import 'ui/home_page.dart';
-
-
-
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await MongoDatabase.connect();
   runApp(MyApp());
 }
-
-
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
 
@@ -27,13 +20,10 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
 class WalletApp extends StatefulWidget {
   @override
   _WalletAppState createState() => _WalletAppState();
 }
-
 class _WalletAppState extends State<WalletApp> {
   var screens = [
     HomeScreen(),
@@ -76,6 +66,3 @@ class _WalletAppState extends State<WalletApp> {
     );
   }
 }
-
-
-

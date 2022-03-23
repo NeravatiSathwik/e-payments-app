@@ -23,6 +23,11 @@ class MongoDatabase{
     final data = await usercollection.find(where.eq('firstName',query)).toList();
     return data;
   }
+  static Future<List<Map<String,dynamic>>>getQueryViewData(query) async{
+    print(query);
+    final data = await usercollection.find(where.eq('id',query)).toList();
+    return data;
+  }
 
   static Future<List<Map<String,dynamic>>>getQuerystatus(query) async{
     print(query);
